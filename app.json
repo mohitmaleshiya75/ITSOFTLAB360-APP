@@ -15,7 +15,7 @@
         "ITSAppUsesNonExemptEncryption": false
       }
     },
-   "android": {
+    "android": {
       "package": "com.itsoftlab360.com",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
@@ -52,8 +52,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "818b9bcd-a4f7-4004-8ec3-9b2020a305f1"
+        "projectId": "5d2d147d-6b7d-4671-a1e8-486f59cf9cbd"
       }
-    }
+    },
+    "owner": "vishwas34s"
   }
 }
