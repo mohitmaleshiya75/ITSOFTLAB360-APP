@@ -70,10 +70,13 @@
     },
 
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ITSOFTLAB360.com",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
-
-    "android": {
+   "android": {
       "package": "com.itsoftlab360.com",
       "adaptiveIcon": {
         "backgroundColor": "#ffffff",
@@ -108,11 +111,10 @@
       "typedRoutes": true,
       "reactCompiler": true
     },
-
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "2f3ad462-43e5-4c60-a2fb-3333e1cd4321"
+        "projectId": "818b9bcd-a4f7-4004-8ec3-9b2020a305f1"
       }
     }
   }
