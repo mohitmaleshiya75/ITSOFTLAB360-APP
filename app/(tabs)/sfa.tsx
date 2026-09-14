@@ -17,31 +17,27 @@ import Svg, {
     Stop,
 } from "react-native-svg";
 import {
-    Activity,
     AlertTriangle,
     Briefcase,
     Building2,
     CheckCircle2,
     GitBranch,
-    IndianRupee,
     Layers,
-    ShoppingCart,
     Shield,
     Sparkles,
     TrendingUp,
-    UserCheck,
     Users,
 } from "lucide-react-native";
 import dayjs from "dayjs";
-import { SectionCard } from "@/components/DashboardComponents";
+import SectionCard  from "@/components/DashboardComponents";
 
-const COLORS = [
-    "#10B981",
-    "#3B82F6",
-    "#F59E0B",
-    "#EF4444",
-    "#8B5CF6",
-];
+// const COLORS = [
+//     "#10B981",
+//     "#3B82F6",
+//     "#F59E0B",
+//     "#EF4444",
+//     "#8B5CF6",
+// ];
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
@@ -63,9 +59,97 @@ interface Target {
     achievedValue?: number;
 }
 
+// interface Dashboard {
+//     organizationOverview?: {
+//         organizations?: number;
+//         branches?: number;
+//         departments?: number;
+//         teams?: number;
+//         users?: number;
+//     };
+
+//     cards?: {
+//         totalOrganizations?: number;
+//         totalBranches?: number;
+//         totalUsers?: number;
+//         totalCustomers?: number;
+//         totalSalesOrders?: number;
+//         totalRevenue?: number;
+//         todaysRevenue?: number;
+//         completedVisits?: number;
+//         pendingVisits?: number;
+//         todayVisits?: number;
+//         totalVisits?: number;
+//         presentEmployees?: number;
+//         absentEmployees?: number;
+//         leaveRequests?: number;
+//     };
+
+//     visitSummary?: {
+//         COMPLETED?: number;
+//         PENDING?: number;
+//     };
+
+//     targets?: Target[];
+
+//     attendanceToday?: {
+//         PRESENT?: number;
+//         ABSENT?: number;
+//         LEAVE?: number;
+//     };
+
+//     orders?: {
+//         APPROVED?: {
+//             count?: number;
+//             revenue?: number;
+//         };
+//         PENDING?: {
+//             count?: number;
+//         };
+//         CANCELLED?: {
+//             count?: number;
+//         };
+//     };
+
+//     monthlyRevenue?: RevenueItem[];
+
+//     organizationInfo?: {
+//         name?: string;
+//     };
+
+//     recentOrganizations?: {
+//         name?: string;
+//     }[];
+
+//     recentOrders?: {
+//         id?: string;
+//         orderNumber?: string;
+//         customer?: {
+//             name?: string;
+//         };
+//         status?: string;
+//         totalAmount?: number;
+//         createdAt?: string;
+//     }[];
+
+//     licenseQuota?: {
+//         maxLicenses?: number;
+//         consumedLicenses?: number;
+//         availableLicenses?: number;
+//         isLimitReached?: boolean;
+//     };
+
+//     license?: {
+//         maxLicenses?: number;
+//         consumedLicenses?: number;
+//         availableLicenses?: number;
+//         isLimitReached?: boolean;
+//     };
+// }
 interface Dashboard {
     organizationOverview?: {
         organizations?: number;
+        companies?: number;
         branches?: number;
         departments?: number;
         teams?: number;
@@ -74,7 +158,10 @@ interface Dashboard {
 
     cards?: {
         totalOrganizations?: number;
+        totalCompanies?: number;
         totalBranches?: number;
+        totalDepartments?: number;
+        totalTeams?: number;
         totalUsers?: number;
         totalCustomers?: number;
         totalSalesOrders?: number;
@@ -89,20 +176,15 @@ interface Dashboard {
         leaveRequests?: number;
     };
 
-    visitSummary?: {
-        COMPLETED?: number;
-        PENDING?: number;
-    };
-
-    targets?: Target[];
-
-    attendanceToday?: {
-        PRESENT?: number;
-        ABSENT?: number;
-        LEAVE?: number;
-    };
-
     orders?: {
+        DRAFT?: {
+            count?: number;
+            revenue?: number;
+        };
+        COMPLETED?: {
+            count?: number;
+            revenue?: number;
+        };
         APPROVED?: {
             count?: number;
             revenue?: number;
@@ -117,12 +199,19 @@ interface Dashboard {
 
     monthlyRevenue?: RevenueItem[];
 
-    organizationInfo?: {
-        name?: string;
-    };
-
     recentOrganizations?: {
+        id?: string;
         name?: string;
+        slug?: string;
+        createdAt?: string;
+    }[];
+
+    recentUsers?: {
+        id?: string;
+        firstName?: string;
+        lastName?: string;
+        email?: string;
+        createdAt?: string;
     }[];
 
     recentOrders?: {
@@ -136,6 +225,17 @@ interface Dashboard {
         createdAt?: string;
     }[];
 
+    visitSummary?: {
+        COMPLETED?: number;
+        PENDING?: number;
+    };
+
+    attendanceToday?: {
+        PRESENT?: number;
+        ABSENT?: number;
+        LEAVE?: number;
+    };
+
     licenseQuota?: {
         maxLicenses?: number;
         consumedLicenses?: number;
@@ -148,6 +248,12 @@ interface Dashboard {
         consumedLicenses?: number;
         availableLicenses?: number;
         isLimitReached?: boolean;
+    };
+
+    targets?: Target[];
+
+    organizationInfo?: {
+        name?: string;
     };
 }
 
@@ -167,6 +273,7 @@ const RevenueChart = ({
 }: {
     data: RevenueItem[];
 }) => {
+    
     const chartWidth = Math.max(SCREEN_WIDTH - 48, 300);
     const chartHeight = 250;
 
@@ -864,7 +971,7 @@ export default function SuperAdminDashboard() {
     const organizationName = useMemo(() => {
         return (
             user?.organization?.name ||
-            user?.organizationName ||
+            user?.organization.name ||
             typedDashboard?.organizationInfo?.name ||
             typedDashboard?.recentOrganizations?.[0]?.name ||
             "Acme Corporation"
@@ -1237,7 +1344,6 @@ export default function SuperAdminDashboard() {
 
         const max =
             license?.maxLicenses ??
-            user?.organization?.maxLicenses ??
             20;
 
         const consumed =
@@ -1396,32 +1502,32 @@ export default function SuperAdminDashboard() {
     /**
      * Error
      */
-    if (error) {
-        return (
-            <ErrorState
-                title="Failed to load dashboard"
-                message="Unable to fetch executive dashboard data. Please ensure the backend server is running."
-                onRetry={refresh}
-            />
-        );
-    }
+    // if (error) {
+    //     return (
+    //         <ErrorState
+    //             title="Failed to load dashboard"
+    //             message="Unable to fetch executive dashboard data. Please ensure the backend server is running."
+    //             onRetry={refresh}
+    //         />
+    //     );
+    // }
 
     /**
      * Empty
      */
-    const hasData =
-        dashboard &&
-        Object.keys(dashboard).length > 0;
+    // const hasData =
+    //     dashboard &&
+    //     Object.keys(dashboard).length > 0;
 
-    if (!hasData) {
-        return (
-            <EmptyDashboard
-                title="No Dashboard Data"
-                description="The dashboard data is not available yet. Data will appear once activities are recorded."
-                onAction={refresh}
-            />
-        );
-    }
+    // if (!hasData) {
+    //     return (
+    //         <EmptyDashboard
+    //             title="No Dashboard Data"
+    //             description="The dashboard data is not available yet. Data will appear once activities are recorded."
+    //             onAction={refresh}
+    //         />
+    //     );
+    // }
 
     /**
      * Main dashboard
@@ -1518,7 +1624,7 @@ export default function SuperAdminDashboard() {
                     </View>
 
                     <Pressable
-                        onPress={refresh}
+                        // onPress={refresh}
                         style={({ pressed }) => [
                             styles.refreshButton,
                             pressed &&
@@ -1557,7 +1663,7 @@ export default function SuperAdminDashboard() {
                 {/* =====================================================
             KPI STATS
         ====================================================== */}
-                <StatsGrid>
+                {/* <StatsGrid>
                     <StatCard
                         title="Assigned Customers"
                         value={totalCustomers}
@@ -1587,7 +1693,7 @@ export default function SuperAdminDashboard() {
                         color="#059669"
                         format="currency"
                     />
-                </StatsGrid>
+                </StatsGrid> */}
 
                 {/* =====================================================
             REVENUE ANALYTICS
@@ -1595,7 +1701,7 @@ export default function SuperAdminDashboard() {
                 <SectionCard
                     title="System Revenue Analytics"
                     subtitle="Real-time monthly revenue trajectory across all organizations"
-                    icon={TrendingUp}
+                    // icon={TrendingUp}
                 >
                     <View
                         style={
@@ -1634,17 +1740,17 @@ export default function SuperAdminDashboard() {
                 {/* =====================================================
             ACTIVITY
         ====================================================== */}
-                <SectionCard
+                {/* <SectionCard
                     title="System Activity Feed"
                     subtitle="Real-time operations & transaction log across organizations"
-                    icon={Activity}
+                    // icon={Activity}
                 >
                     <ActivityTimeline
                         activities={
                             recentActivities
                         }
                     />
-                </SectionCard>
+                </SectionCard> */}
 
                 {/* =====================================================
             FOOTER

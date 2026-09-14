@@ -1448,7 +1448,6 @@ import {
     Briefcase,
     Building2,
     CheckCircle2,
-    Download,
     GitBranch,
     IndianRupee,
     Layers,
@@ -1460,17 +1459,7 @@ import {
     Users,
 } from "lucide-react-native";
 import dayjs from "dayjs";
-
-import useExecutiveDashboard from "../../hooks/useExecutiveDashboard";
-import { useAuth } from "../../context/AuthContext";
-
-// These should be your React Native versions of these components.
-import StatsGrid from "../../components/dashboard/StatsGrid";
-import StatCard from "../../components/dashboard/StatCard";
-import SectionCard from "../../components/dashboard/SectionCard";
-import ActivityTimeline from "../../components/dashboard/ActivityTimeline";
-import EmptyDashboard from "../../components/dashboard/EmptyDashboard";
-import ErrorState from "../../components/dashboard/ErrorState";
+import SectionCard from "@/components/DashboardComponents";
 
 const COLORS = [
     "#10B981",
@@ -1791,7 +1780,7 @@ const OrganizationOverviewCard = ({
         <SectionCard
             title="Organization Overview & Hierarchy"
             subtitle="Live organization structure, branches, departments, and user totals"
-            icon={Building2}
+        // icon={Building2}
         >
             <View style={styles.organizationGrid}>
                 {items.map((item) => {
@@ -1980,14 +1969,290 @@ const LicenseQuotaBanner = ({
 };
 
 export default function SuperAdminDashboard() {
-    const { user } = useAuth();
+    const user = {
+            "id": "d47407f0-4cf5-4fac-9295-351bf69689dc",
+            "organizationId": "99fd17c1-bdf4-4d50-88f4-b89d97afe905",
+            "branchId": null,
+            "departmentId": null,
+            "teamId": null,
+            "territoryId": null,
+            "managerId": null,
+            "email": "devendradangi9174@gmail.com",
+            "firstName": "Devendra",
+            "lastName": "Dangi",
+            "phoneNumber": "9876543210",
+            "avatarUrl": null,
+            "isActive": true,
+            "roles": [
+                {
+                    "userId": "d47407f0-4cf5-4fac-9295-351bf69689dc",
+                    "roleId": "be2c9a26-3040-4a15-8cea-139d71d4f328",
+                    "assignedAt": "2026-08-24T07:21:46.367Z",
+                    "role": {
+                        "id": "be2c9a26-3040-4a15-8cea-139d71d4f328",
+                        "organizationId": "99fd17c1-bdf4-4d50-88f4-b89d97afe905",
+                        "name": "Organization Super Admin",
+                        "description": "Full system access and global configuration",
+                        "isSystem": true,
+                        "level": null,
+                        "parentRoleId": null,
+                        "createdAt": "2026-08-05T09:08:30.124Z",
+                        "updatedAt": "2026-08-05T09:08:30.124Z",
+                        "permissions": []
+                    }
+                }
+            ],
+            "branch": null,
+            "department": null,
+            "organization": {
+                "id": "99fd17c1-bdf4-4d50-88f4-b89d97afe905",
+                "name": "IT SoftLab Pvt ltd",
+                "slug": "it-softlab-pvt-ltd"
+            },
+            "emailVerifiedAt": "2026-08-05T09:08:31.076Z",
+            "createdAt": "2026-08-05T07:40:49.756Z",
+            "updatedAt": "2026-09-10T05:44:47.463Z"
+        }
 
-    const {
-        dashboard,
-        loading,
-        error,
-        refresh,
-    } = useExecutiveDashboard();
+    const loading = false;
+    const error = false;
+    const refresh = false;
+    const dashboard = {
+        "success": true,
+        "message": "Super Admin dashboard data retrieved.",
+        "timestamp": "2026-09-14T10:47:57.221Z",
+        "data": {
+            "organizationOverview": {
+                "organizations": 1,
+                "companies": 0,
+                "branches": 9,
+                "departments": 8,
+                "teams": 8,
+                "users": 29
+            },
+            "cards": {
+                "totalOrganizations": 1,
+                "totalCompanies": 0,
+                "totalBranches": 9,
+                "totalDepartments": 8,
+                "totalTeams": 8,
+                "totalUsers": 29,
+                "totalCustomers": 9,
+                "totalSalesOrders": 30,
+                "totalVisits": 0,
+                "todayVisits": 0,
+                "pendingVisits": 0,
+                "completedVisits": 0,
+                "presentEmployees": 0,
+                "absentEmployees": 0,
+                "leaveRequests": 0,
+                "totalRevenue": 638660,
+                "todaysRevenue": 0
+            },
+            "orders": {
+                "DRAFT": {
+                    "count": 24,
+                    "revenue": 538600
+                },
+                "COMPLETED": {
+                    "count": 6,
+                    "revenue": 100060
+                }
+            },
+            "monthlyRevenue": [
+                {
+                    "month": "Jan",
+                    "revenue": 0
+                },
+                {
+                    "month": "Feb",
+                    "revenue": 0
+                },
+                {
+                    "month": "Mar",
+                    "revenue": 0
+                },
+                {
+                    "month": "Apr",
+                    "revenue": 0
+                },
+                {
+                    "month": "May",
+                    "revenue": 0
+                },
+                {
+                    "month": "Jun",
+                    "revenue": 0
+                },
+                {
+                    "month": "Jul",
+                    "revenue": 0
+                },
+                {
+                    "month": "Aug",
+                    "revenue": 497140
+                },
+                {
+                    "month": "Sep",
+                    "revenue": 141520
+                },
+                {
+                    "month": "Oct",
+                    "revenue": 0
+                },
+                {
+                    "month": "Nov",
+                    "revenue": 0
+                },
+                {
+                    "month": "Dec",
+                    "revenue": 0
+                }
+            ],
+            "visitSummary": {},
+            "attendanceToday": {},
+            "recentOrganizations": [
+                {
+                    "id": "99fd17c1-bdf4-4d50-88f4-b89d97afe905",
+                    "name": "IT SoftLab Pvt ltd",
+                    "slug": "it-softlab-pvt-ltd",
+                    "createdAt": "2026-08-05T08:43:35.798Z"
+                }
+            ],
+            "recentCompanies": [],
+            "recentUsers": [
+                {
+                    "id": "089c5de3-1056-47c1-9945-d875a0a572d8",
+                    "firstName": "shreyansh",
+                    "lastName": "verma",
+                    "email": "shreyansh123@gmail.com",
+                    "createdAt": "2026-09-02T05:19:10.919Z"
+                },
+                {
+                    "id": "bb7a119d-0473-4b4e-934e-a598e5c2434a",
+                    "firstName": "Rama",
+                    "lastName": "Singh",
+                    "email": "ramsingh123@gmail.com",
+                    "createdAt": "2026-08-27T09:00:49.380Z"
+                },
+                {
+                    "id": "5a056485-4d5a-452b-8f1d-ab835652f6e9",
+                    "firstName": "aashu",
+                    "lastName": "ji",
+                    "email": "aashu123@gmail.com",
+                    "createdAt": "2026-08-27T08:29:48.884Z"
+                },
+                {
+                    "id": "1512bcde-80f7-4df9-a8b8-4fcc84c03ae6",
+                    "firstName": "gautam",
+                    "lastName": "rajput",
+                    "email": "gautamji@gmail.com",
+                    "createdAt": "2026-08-27T07:24:34.641Z"
+                },
+                {
+                    "id": "2517d9ad-20a2-47ab-ac08-0dfb5132ff57",
+                    "firstName": "jaydeep",
+                    "lastName": "seth",
+                    "email": "jaydeep321@gmail.cpm",
+                    "createdAt": "2026-08-27T07:14:07.044Z"
+                }
+            ],
+            "recentOrders": [
+                {
+                    "id": "53e8068a-e861-4a08-967b-2f3255c3454c",
+                    "orderNumber": "ORD-CRM-408026-5",
+                    "status": "DRAFT",
+                    "totalAmount": 8520,
+                    "createdAt": "2026-09-08T09:23:28.027Z",
+                    "customer": {
+                        "name": "Customer G"
+                    }
+                },
+                {
+                    "id": "fb070ba2-8227-4690-8076-fda9b96fd3cd",
+                    "orderNumber": "ORD-CRM-408007-4",
+                    "status": "DRAFT",
+                    "totalAmount": 2500,
+                    "createdAt": "2026-09-08T09:23:28.010Z",
+                    "customer": {
+                        "name": "Customer F"
+                    }
+                },
+                {
+                    "id": "f12d38d5-89c5-47a3-a9c0-8a17e090ffc9",
+                    "orderNumber": "ORD-CRM-407936-3",
+                    "status": "DRAFT",
+                    "totalAmount": 36000,
+                    "createdAt": "2026-09-08T09:23:27.937Z",
+                    "customer": {
+                        "name": "Customer E"
+                    }
+                },
+                {
+                    "id": "546ba4e8-c4d4-40b7-a761-ecf496ee973f",
+                    "orderNumber": "ORD-CRM-407922-2",
+                    "status": "DRAFT",
+                    "totalAmount": 22500,
+                    "createdAt": "2026-09-08T09:23:27.923Z",
+                    "customer": {
+                        "name": "Customer B"
+                    }
+                },
+                {
+                    "id": "f6b2bb6c-b188-432e-9026-32abf88c1b87",
+                    "orderNumber": "ORD-CRM-407807-1",
+                    "status": "DRAFT",
+                    "totalAmount": 36000,
+                    "createdAt": "2026-09-08T09:23:27.902Z",
+                    "customer": {
+                        "name": "Customer A"
+                    }
+                },
+                {
+                    "id": "e164367a-b1cb-446b-9d65-b6f0b56783c9",
+                    "orderNumber": "ORD-CRM-666008-1",
+                    "status": "DRAFT",
+                    "totalAmount": 36000,
+                    "createdAt": "2026-09-03T09:44:26.049Z",
+                    "customer": {
+                        "name": "mangilal palasia"
+                    }
+                },
+                {
+                    "id": "1ba41adc-6305-4f91-9f8a-8fab3a2700e3",
+                    "orderNumber": "ORD-CRM-014265-1",
+                    "status": "COMPLETED",
+                    "totalAmount": 36000,
+                    "createdAt": "2026-08-27T08:06:54.266Z",
+                    "customer": {
+                        "name": "Customer A"
+                    }
+                },
+                {
+                    "id": "b97f7c32-cf97-452c-9a8e-c4a3f6031522",
+                    "orderNumber": "ORD-CRM-973790-1",
+                    "status": "DRAFT",
+                    "totalAmount": 36000,
+                    "createdAt": "2026-08-27T08:06:13.968Z",
+                    "customer": {
+                        "name": "Customer A"
+                    }
+                }
+            ],
+            "licenseQuota": {
+                "maxLicenses": 100,
+                "consumedLicenses": 29,
+                "availableLicenses": 71,
+                "isLimitReached": false
+            },
+            "license": {
+                "maxLicenses": 100,
+                "consumedLicenses": 29,
+                "availableLicenses": 71,
+                "isLimitReached": false
+            }
+        }
+    }
 
     const fadeAnim = useRef(
         new Animated.Value(0)
@@ -2025,7 +2290,7 @@ export default function SuperAdminDashboard() {
     const organizationName = useMemo(() => {
         return (
             user?.organization?.name ||
-            user?.organizationName ||
+            user?.organization.name ||
             typedDashboard?.organizationInfo?.name ||
             typedDashboard?.recentOrganizations?.[0]?.name ||
             "Acme Corporation"
@@ -2398,7 +2663,6 @@ export default function SuperAdminDashboard() {
 
         const max =
             license?.maxLicenses ??
-            user?.organization?.maxLicenses ??
             20;
 
         const consumed =
@@ -2557,32 +2821,32 @@ export default function SuperAdminDashboard() {
     /**
      * Error
      */
-    if (error) {
-        return (
-            <ErrorState
-                title="Failed to load dashboard"
-                message="Unable to fetch executive dashboard data. Please ensure the backend server is running."
-                onRetry={refresh}
-            />
-        );
-    }
+    // if (error) {
+    //     return (
+    //         <ErrorState
+    //             title="Failed to load dashboard"
+    //             message="Unable to fetch executive dashboard data. Please ensure the backend server is running."
+    //             onRetry={refresh}
+    //         />
+    //     );
+    // }
 
     /**
      * Empty
      */
-    const hasData =
-        dashboard &&
-        Object.keys(dashboard).length > 0;
+    // const hasData =
+    //     dashboard &&
+    //     Object.keys(dashboard).length > 0;
 
-    if (!hasData) {
-        return (
-            <EmptyDashboard
-                title="No Dashboard Data"
-                description="The dashboard data is not available yet. Data will appear once activities are recorded."
-                onAction={refresh}
-            />
-        );
-    }
+    // if (!hasData) {
+    //     return (
+    //         <EmptyDashboard
+    //             title="No Dashboard Data"
+    //             description="The dashboard data is not available yet. Data will appear once activities are recorded."
+    //             onAction={refresh}
+    //         />
+    //     );
+    // }
 
     /**
      * Main dashboard
@@ -2679,7 +2943,7 @@ export default function SuperAdminDashboard() {
                     </View>
 
                     <Pressable
-                        onPress={refresh}
+                        // onPress={refresh}
                         style={({ pressed }) => [
                             styles.refreshButton,
                             pressed &&
@@ -2718,7 +2982,7 @@ export default function SuperAdminDashboard() {
                 {/* =====================================================
             KPI STATS
         ====================================================== */}
-                <StatsGrid>
+                {/* <StatsGrid>
                     <StatCard
                         title="Assigned Customers"
                         value={totalCustomers}
@@ -2748,7 +3012,7 @@ export default function SuperAdminDashboard() {
                         color="#059669"
                         format="currency"
                     />
-                </StatsGrid>
+                </StatsGrid> */}
 
                 {/* =====================================================
             REVENUE ANALYTICS
@@ -2756,7 +3020,7 @@ export default function SuperAdminDashboard() {
                 <SectionCard
                     title="System Revenue Analytics"
                     subtitle="Real-time monthly revenue trajectory across all organizations"
-                    icon={TrendingUp}
+                    // icon={TrendingUp}
                 >
                     <View
                         style={
@@ -2795,17 +3059,17 @@ export default function SuperAdminDashboard() {
                 {/* =====================================================
             ACTIVITY
         ====================================================== */}
-                <SectionCard
+                {/* <SectionCard
                     title="System Activity Feed"
                     subtitle="Real-time operations & transaction log across organizations"
-                    icon={Activity}
+                    // icon={Activity}
                 >
                     <ActivityTimeline
                         activities={
                             recentActivities
                         }
                     />
-                </SectionCard>
+                </SectionCard> */}
 
                 {/* =====================================================
             FOOTER
