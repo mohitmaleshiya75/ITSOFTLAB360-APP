@@ -1,5 +1,4 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
     ActivityIndicator,
@@ -18,7 +17,6 @@ import {
 import { useAuth } from "@/components/login/useLogin";
 
 export default function LoginScreen() {
-    const router = useRouter();
     const { login } = useAuth();
 
     const [username, setUsername] = useState("");
@@ -47,6 +45,9 @@ export default function LoginScreen() {
 
         try {
             setLoading(true);
+            if(username!=="rahul.ahirwal"&&password!=="rahul.ahirwal"){
+                setErrorMessage("Invalid username or password.");
+            }
 
             const success = await login(username, password);
 
@@ -56,7 +57,6 @@ export default function LoginScreen() {
             }
 
             // Login successful
-            router.replace("/(tabs)/index");
         } catch (error) {
             console.error(error);
             setErrorMessage("Unable to login. Please try again.");

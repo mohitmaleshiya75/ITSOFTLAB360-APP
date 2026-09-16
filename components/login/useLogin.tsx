@@ -7,6 +7,7 @@ import React, {
     useState,
 } from "react";
 import * as SecureStore from "expo-secure-store";
+import { useRouter } from "expo-router";
 
 const AUTH_KEY = "itsoftlab360_authenticated";
 
@@ -33,6 +34,7 @@ export function AuthProvider({
 }: {
     children: React.ReactNode;
 }) {
+    const router = useRouter();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -91,6 +93,8 @@ export function AuthProvider({
                 );
 
                 setIsAuthenticated(true);
+                router.replace("/(tabs)");
+
 
                 return {
                     success: true,

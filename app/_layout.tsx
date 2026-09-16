@@ -15,6 +15,7 @@ function AppNavigator() {
   const colorScheme = useColorScheme();
   const insets = useSafeAreaInsets();
   
+  
 
   const {
     isAuthenticated,
