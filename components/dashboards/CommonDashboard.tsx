@@ -892,7 +892,7 @@ export default function CommonApplicationDashboard({
                     </View>
 
                     <Pressable style={styles.settingsButton}>
-                        <TouchableOpacity onPress={() => router.push("/(tabs)")} style={{ paddingHorizontal: 10 }}> <Ionicons name="arrow-back" size={24} color="green" /> </TouchableOpacity>
+                        <TouchableOpacity onPress={() => router.push("/")} style={{ paddingHorizontal: 10 }}> <Ionicons name="arrow-back" size={24} color="green" /> </TouchableOpacity>
                     </Pressable>
                 </View>
 

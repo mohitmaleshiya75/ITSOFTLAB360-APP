@@ -93,7 +93,7 @@ export function AuthProvider({
                 );
 
                 setIsAuthenticated(true);
-                router.replace("/(tabs)");
+                router.replace("/");
 
 
                 return {
@@ -109,7 +109,7 @@ export function AuthProvider({
                 };
             }
         },
-        []
+        [router]
     );
 
     /**
@@ -125,7 +125,7 @@ export function AuthProvider({
 
             setIsAuthenticated(false);
         }
-    }, []);
+    }, [router]);
 
     const value = useMemo(
         () => ({
