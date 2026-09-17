@@ -118,7 +118,7 @@ export function AuthProvider({
     const logout = useCallback(async () => {
         try {
             await SecureStore.deleteItemAsync(AUTH_KEY);
-
+            router.replace("/login");
             setIsAuthenticated(false);
         } catch (error) {
             console.error("Logout error:", error);
@@ -146,6 +146,7 @@ export function AuthProvider({
 
 export function useAuth() {
     const context = useContext(AuthContext);
+    
 
     if (!context) {
         throw new Error(

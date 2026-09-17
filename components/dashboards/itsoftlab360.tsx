@@ -21,7 +21,7 @@ import {
     GraduationCap,
     FileText,
     Package,
-    Building2,
+    // Building2,
     ChevronRight,
     // Grid3X3,
     TrendingUp,
@@ -110,7 +110,7 @@ const APPLICATIONS: Application[] = [
         id: "qms",
         name: "QMS",
         shortName: "QMS",
-        description: "Quality Management System",
+        description: "Queue Management System",
         icon: ClipboardCheck,
         color: "#059669",
         background: "#ECFDF5",
@@ -120,7 +120,7 @@ const APPLICATIONS: Application[] = [
         id: "ai",
         name: "AI Automation",
         shortName: "AI",
-        description: "AI Powered Automation",
+        description: "AI Automation",
         icon: Bot,
         color: "#9333EA",
         background: "#FAF5FF",
@@ -180,7 +180,7 @@ const APPLICATIONS: Application[] = [
         id: "dms",
         name: "DMS",
         shortName: "DMS",
-        description: "Data Management System",
+        description: "Dealer Management System",
         icon: Package,
         color: "#475569",
         background: "#F8FAFC",
@@ -567,10 +567,10 @@ export default function CommonDashboard() {
                                         </View>
                                     </View>
 
-                                    <ChevronRight
+                                    {/* <ChevronRight
                                         size={18}
                                         color="#94A3B8"
-                                    />
+                                    /> */}
                                 </Pressable>
                             );
                         }

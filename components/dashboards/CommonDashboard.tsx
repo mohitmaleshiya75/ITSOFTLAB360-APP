@@ -6,6 +6,7 @@ import {
     StyleSheet,
     Text,
     View,
+    TouchableOpacity
 } from "react-native";
 
 import {
@@ -15,15 +16,23 @@ import {
     ArrowUpRight,
     BarChart3,
     CheckCircle2,
+    Clock,
     Clock3,
     Database,
     FileText,
+    IndianRupee,
+    ListChecks,
     Package,
     Settings,
-    ShieldCheck,
+    // ShieldCheck,
+    ShoppingCart,
     TrendingUp,
+    UserCheck,
     Users,
 } from "lucide-react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+// import { TouchableOpacity } from "react-native";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
@@ -307,59 +316,82 @@ const APPLICATION_DATA: Record<
     },
 
     qms: {
-        welcome: "Quality Management Overview",
+        welcome: "Queue Management Overview",
+
         description:
-            "Monitor quality checks, audits, inspections and compliance.",
+            "Monitor queues, waiting customers, service counters and customer flow.",
+
         metrics: [
             {
-                title: "Inspections",
-                value: "428",
-                change: "+8.6%",
+                title: "Active Queues",
+                value: "24",
+                change: "+8.2%",
                 positive: true,
-                icon: ShieldCheck,
+                icon: ListChecks,
             },
             {
-                title: "Passed",
-                value: "394",
-                change: "+6.2%",
+                title: "Waiting Customers",
+                value: "86",
+                change: "-12.4%",
+                positive: true,
+                icon: Users,
+            },
+            {
+                title: "Customers Served",
+                value: "1,284",
+                change: "+14.6%",
                 positive: true,
                 icon: CheckCircle2,
             },
             {
-                title: "Open Issues",
-                value: "24",
-                change: "-12.4%",
+                title: "Avg. Wait Time",
+                value: "08:42",
+                change: "-9.8%",
                 positive: true,
-                icon: AlertCircle,
-            },
-            {
-                title: "Compliance",
-                value: "94.8%",
-                change: "+3.8%",
-                positive: true,
-                icon: BarChart3,
+                icon: Clock,
             },
         ],
-        chart: [70, 74, 72, 81, 85, 89, 95],
-        chartLabels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+
+        chart: [58, 64, 61, 72, 78, 85, 91],
+
+        chartLabels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+        ],
+
         activities: [
             {
-                title: "Inspection Completed",
-                description: "Quality inspection #INS-482 completed.",
-                time: "12 min ago",
+                title: "Queue Completed",
+                description:
+                    "Counter C-04 completed service for 126 customers.",
+                time: "8 min ago",
                 type: "success",
             },
             {
-                title: "Quality Issue",
-                description: "New issue reported in production.",
-                time: "45 min ago",
+                title: "Customers Waiting",
+                description:
+                    "18 customers are currently waiting at the OPD counter.",
+                time: "24 min ago",
                 type: "warning",
             },
             {
-                title: "Audit Completed",
-                description: "Monthly compliance audit completed.",
-                time: "2 hrs ago",
-                type: "success",
+                title: "Counter Opened",
+                description:
+                    "Counter C-07 is now active and accepting customers.",
+                time: "1 hr ago",
+                type: "info",
+            },
+            {
+                title: "Token Called",
+                description:
+                    "Token QMS-1048 has been called at Counter C-03.",
+                time: "1 hr ago",
+                type: "info",
             },
         ],
     },
@@ -713,59 +745,82 @@ const APPLICATION_DATA: Record<
     },
 
     dms: {
-        welcome: "Data Management Overview",
+        welcome: "Dealer Management Overview",
+
         description:
-            "Monitor data records, datasets, imports and storage.",
+            "Monitor dealers, orders, sales performance, payments and dealer network activity.",
+
         metrics: [
             {
-                title: "Data Records",
-                value: "2.8M",
-                change: "+16.4%",
-                positive: true,
-                icon: Database,
-            },
-            {
-                title: "Data Sets",
+                title: "Total Dealers",
                 value: "428",
-                change: "+8.2%",
+                change: "+8.6%",
                 positive: true,
-                icon: FileText,
+                icon: Users,
             },
             {
-                title: "Imports",
-                value: "184",
-                change: "+11.6%",
+                title: "Active Dealers",
+                value: "394",
+                change: "+6.2%",
                 positive: true,
-                icon: Activity,
+                icon: UserCheck,
             },
             {
-                title: "Data Quality",
-                value: "96.8%",
-                change: "+2.8%",
+                title: "Dealer Orders",
+                value: "1,284",
+                change: "+14.8%",
                 positive: true,
-                icon: CheckCircle2,
+                icon: ShoppingCart,
+            },
+            {
+                title: "Dealer Sales",
+                value: "₹48.6L",
+                change: "+11.4%",
+                positive: true,
+                icon: IndianRupee,
             },
         ],
-        chart: [45, 55, 63, 69, 78, 84, 93],
-        chartLabels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+
+        chart: [42, 48, 55, 61, 68, 76, 84],
+
+        chartLabels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+        ],
+
         activities: [
             {
-                title: "Data Import Completed",
-                description: "48,200 records imported successfully.",
-                time: "8 min ago",
+                title: "New Dealer Registered",
+                description:
+                    "ABC Distributors has been added to the dealer network.",
+                time: "12 min ago",
                 type: "success",
             },
             {
-                title: "Data Validation",
-                description: "184 records require validation.",
-                time: "36 min ago",
-                type: "warning",
+                title: "Dealer Order Created",
+                description:
+                    "Dealer order #DMS-4821 worth ₹1,24,500 was created.",
+                time: "38 min ago",
+                type: "info",
             },
             {
-                title: "Dataset Updated",
-                description: "Customer master dataset updated.",
+                title: "Dealer Payment Received",
+                description:
+                    "Payment of ₹2,48,000 received from XYZ Enterprises.",
+                time: "1 hr ago",
+                type: "success",
+            },
+            {
+                title: "Dealer Target Alert",
+                description:
+                    "12 dealers are below 50% of their monthly sales target.",
                 time: "2 hrs ago",
-                type: "info",
+                type: "warning",
             },
         ],
     },
@@ -778,6 +833,7 @@ COMMON DASHBOARD
 export default function CommonApplicationDashboard({
     application,
 }: ApplicationDashboardProps) {
+    const router = useRouter();
     const data = useMemo(() => {
         return (
             APPLICATION_DATA[application.id] ||
@@ -836,10 +892,7 @@ export default function CommonApplicationDashboard({
                     </View>
 
                     <Pressable style={styles.settingsButton}>
-                        <Settings
-                            size={19}
-                            color="#64748B"
-                        />
+                        <TouchableOpacity onPress={() => router.push("/(tabs)")} style={{ paddingHorizontal: 10 }}> <Ionicons name="arrow-back" size={24} color="green" /> </TouchableOpacity>
                     </Pressable>
                 </View>
 

@@ -20,6 +20,7 @@ import {
     ShieldCheck,
     User,
 } from "lucide-react-native";
+import LogoutButton from "./login/logout";
 
 const USER = {
     name: "RAHUL AHIRWAL",
@@ -263,6 +264,7 @@ export default function ProfileScreen() {
                         />
                     </Pressable>
                 </Section> */}
+                <LogoutButton/>
 
                 {/* Footer */}
                 <Text style={styles.footer}>

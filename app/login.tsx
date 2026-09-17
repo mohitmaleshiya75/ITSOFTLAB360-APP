@@ -45,7 +45,7 @@ export default function LoginScreen() {
 
         try {
             setLoading(true);
-            if(username!=="rahul.ahirwal"&&password!=="rahul.ahirwal"){
+            if(username!=="rahul.ahirwal"||password!=="rahul.ahirwal"){
                 setErrorMessage("Invalid username or password.");
             }
 
