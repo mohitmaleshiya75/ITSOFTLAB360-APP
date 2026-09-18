@@ -5,7 +5,7 @@ import {
     LayoutDashboard,
     User,
 } from "lucide-react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
 import {
     StyleSheet,
     Text,
@@ -16,12 +16,11 @@ import ApplicationLauncher from "@/components/AppList";
 
 export default function TabLayout() {
     const pathname = usePathname();
-    // const insets = useSafeAreaInsets();
+    const insets = useSafeAreaInsets();
     const isProfile = pathname.includes("/profile");
 
     return (
         <SafeAreaProvider>
-
             <Tabs
                 screenOptions={{
                     headerShown: true,
@@ -30,6 +29,8 @@ export default function TabLayout() {
                     header: () => (
                         <View
                             style={[
+                                { paddingTop: insets.top+4, }
+                                ,
                                 styles.header
                             ]}
                         >
@@ -77,16 +78,16 @@ export default function TabLayout() {
 
                             {/* RIGHT */}
                             <View style={styles.headerRight}>
-                                    <ApplicationLauncher
-                                        onSelectApplication={(application) => {
-                                            router.push({
-                                                pathname: "/application/[id]",
-                                                params: {
-                                                    id: application.id,
-                                                },
-                                            });
-                                        }}
-                                    />
+                                <ApplicationLauncher
+                                    onSelectApplication={(application) => {
+                                        router.push({
+                                            pathname: "/application/[id]",
+                                            params: {
+                                                id: application.id,
+                                            },
+                                        });
+                                    }}
+                                />
                             </View>
                         </View>
                     ),

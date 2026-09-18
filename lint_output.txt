@@ -1,0 +1,287 @@
+
+F:\projects\expo-app\ITSOFTLAB360\app\login.tsx
+  16:10  warning  'ShieldCheck' is defined but never used  @typescript-eslint/no-unused-vars
+  16:23  warning  'Sparkles' is defined but never used     @typescript-eslint/no-unused-vars
+
+F:\projects\expo-app\ITSOFTLAB360\components\dashboards\HrmsmDashboard.tsx
+   31:7   warning  'USE_FAKE_DATA' is assigned a value but never used           @typescript-eslint/no-unused-vars
+  168:11  warning  'router' is assigned a value but never used                  @typescript-eslint/no-unused-vars
+  414:11  warning  'features' is assigned a value but never used                @typescript-eslint/no-unused-vars
+  414:21  warning  Array type using 'Array<T>' is forbidden. Use 'T[]' instead  @typescript-eslint/array-type
+
+F:\projects\expo-app\ITSOFTLAB360\components\dashboards\SupplyChainAdminView.tsx
+  287:9  warning  React Hook useMemo has a missing dependency: 'data.usersByRole'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+F:\projects\expo-app\ITSOFTLAB360\components\dashboards\sfa.tsx
+  2189:11  warning  'ActivityItem' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  3525:22  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\dashboards\sfa.tsx:3525:22
+  3523 |     ======================================================== */
+  3524 |
+> 3525 |     const fadeAnim = useRef(
+       |                      ^^^^^^^
+> 3526 |         new Animated.Value(0)
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 3527 |     ).current;
+       | ^^^^^^^^^^^^^^ Cannot access ref value during render
+  3528 |
+  3529 |     const translateY = useRef(
+  3530 |         new Animated.Value(10)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         react-hooks/refs
+  3525:22  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\dashboards\sfa.tsx:3525:22
+  3523 |     ======================================================== */
+  3524 |
+> 3525 |     const fadeAnim = useRef(
+       |                      ^^^^^^^
+> 3526 |         new Animated.Value(0)
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 3527 |     ).current;
+       | ^^^^^^^^^^^^^^ Cannot access ref value during render
+  3528 |
+  3529 |     const translateY = useRef(
+  3530 |         new Animated.Value(10)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         react-hooks/refs
+  3529:24  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\dashboards\sfa.tsx:3529:24
+  3527 |     ).current;
+  3528 |
+> 3529 |     const translateY = useRef(
+       |                        ^^^^^^^
+> 3530 |         new Animated.Value(10)
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 3531 |     ).current;
+       | ^^^^^^^^^^^^^^ Cannot access ref value during render
+  3532 |
+  3533 |     useEffect(() => {
+  3534 |         Animated.parallel([                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                react-hooks/refs
+  3529:24  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\dashboards\sfa.tsx:3529:24
+  3527 |     ).current;
+  3528 |
+> 3529 |     const translateY = useRef(
+       |                        ^^^^^^^
+> 3530 |         new Animated.Value(10)
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 3531 |     ).current;
+       | ^^^^^^^^^^^^^^ Cannot access ref value during render
+  3532 |
+  3533 |     useEffect(() => {
+  3534 |         Animated.parallel([                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                react-hooks/refs
+  3529:24  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\dashboards\sfa.tsx:3529:24
+  3527 |     ).current;
+  3528 |
+> 3529 |     const translateY = useRef(
+       |                        ^^^^^^^
+> 3530 |         new Animated.Value(10)
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 3531 |     ).current;
+       | ^^^^^^^^^^^^^^ Cannot access ref value during render
+  3532 |
+  3533 |     useEffect(() => {
+  3534 |         Animated.parallel([                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                react-hooks/refs
+  3529:24  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\dashboards\sfa.tsx:3529:24
+  3527 |     ).current;
+  3528 |
+> 3529 |     const translateY = useRef(
+       |                        ^^^^^^^
+> 3530 |         new Animated.Value(10)
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 3531 |     ).current;
+       | ^^^^^^^^^^^^^^ Cannot access ref value during render
+  3532 |
+  3533 |     useEffect(() => {
+  3534 |         Animated.parallel([                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                react-hooks/refs
+  3553:8   error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\dashboards\sfa.tsx:3553:8
+  3551 |             ),
+  3552 |         ]).start();
+> 3553 |     }, [
+       |        ^
+> 3554 |         fadeAnim,
+       | ^^^^^^^^^^^^^^^^^
+> 3555 |         translateY,
+       | ^^^^^^^^^^^^^^^^^
+> 3556 |     ]);
+       | ^^^^^^ Cannot access ref value during render
+  3557 |
+  3558 |     /* ========================================================
+  3559 |        THIS IS THE IMPORTANT FIX                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           react-hooks/refs
+  3572:8   warning  React Hook useMemo has missing dependencies: 'user.firstName' and 'user.lastName'. Either include them or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           react-hooks/exhaustive-deps
+  3609:11  warning  The 'targets' conditional could make the dependencies of useMemo Hook (at line 3947) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'targets' in its own useMemo() Hook                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 react-hooks/exhaustive-deps
+  3619:11  warning  'totalOrganizations' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+  3624:11  warning  'totalBranches' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+  4045:20  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\dashboards\sfa.tsx:4045:20
+  4043 |     return (
+  4044 |         <Animated.View
+> 4045 |             style={[
+       |                    ^
+> 4046 |                 styles.screen,
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4047 |                 {
+       …
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4056 |                 },
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4057 |             ]}
+       | ^^^^^^^^^^^^^^ Cannot access ref value during render
+  4058 |         >
+  4059 |             <ScrollView
+  4060 |                 showsVerticalScrollIndicator={                                                                                                                                                                                                                                                                                                                                                                react-hooks/refs
+  4047:17  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\dashboards\sfa.tsx:4047:17
+  4045 |             style={[
+  4046 |                 styles.screen,
+> 4047 |                 {
+       |                 ^
+> 4048 |                     opacity:
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4049 |                         fadeAnim,
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4050 |
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4051 |                     transform: [
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4052 |                         {
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4053 |                             translateY,
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4054 |                         },
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4055 |                     ],
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4056 |                 },
+       | ^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  4057 |             ]}
+  4058 |         >
+  4059 |             <ScrollView  react-hooks/refs
+
+F:\projects\expo-app\ITSOFTLAB360\components\ui\ApiDataLoader.tsx
+  24:23  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\ui\ApiDataLoader.tsx:24:23
+  22 |     accentColor = "#2563EB",
+  23 | }: ApiDataLoaderProps) {
+> 24 |     const pulseAnim = useRef(new Animated.Value(0.4)).current;
+     |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  25 |     const progressAnim = useRef(new Animated.Value(0)).current;
+  26 |
+  27 |     useEffect(() => {                                   react-hooks/refs
+  24:23  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\ui\ApiDataLoader.tsx:24:23
+  22 |     accentColor = "#2563EB",
+  23 | }: ApiDataLoaderProps) {
+> 24 |     const pulseAnim = useRef(new Animated.Value(0.4)).current;
+     |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  25 |     const progressAnim = useRef(new Animated.Value(0)).current;
+  26 |
+  27 |     useEffect(() => {                                   react-hooks/refs
+  24:23  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\ui\ApiDataLoader.tsx:24:23
+  22 |     accentColor = "#2563EB",
+  23 | }: ApiDataLoaderProps) {
+> 24 |     const pulseAnim = useRef(new Animated.Value(0.4)).current;
+     |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  25 |     const progressAnim = useRef(new Animated.Value(0)).current;
+  26 |
+  27 |     useEffect(() => {                                   react-hooks/refs
+  24:23  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\ui\ApiDataLoader.tsx:24:23
+  22 |     accentColor = "#2563EB",
+  23 | }: ApiDataLoaderProps) {
+> 24 |     const pulseAnim = useRef(new Animated.Value(0.4)).current;
+     |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  25 |     const progressAnim = useRef(new Animated.Value(0)).current;
+  26 |
+  27 |     useEffect(() => {                                   react-hooks/refs
+  25:26  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\ui\ApiDataLoader.tsx:25:26
+  23 | }: ApiDataLoaderProps) {
+  24 |     const pulseAnim = useRef(new Animated.Value(0.4)).current;
+> 25 |     const progressAnim = useRef(new Animated.Value(0)).current;
+     |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  26 |
+  27 |     useEffect(() => {
+  28 |         // Continuous pulse animation for server ping beacon  react-hooks/refs
+  55:8   error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\ui\ApiDataLoader.tsx:55:8
+  53 |             pulse.stop();
+  54 |         };
+> 55 |     }, [pulseAnim, progressAnim]);
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  56 |
+  57 |     const progressWidth = progressAnim.interpolate({
+  58 |         inputRange: [0, 1],                                                                                                                   react-hooks/refs
+  57:27  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\ui\ApiDataLoader.tsx:57:27
+  55 |     }, [pulseAnim, progressAnim]);
+  56 |
+> 57 |     const progressWidth = progressAnim.interpolate({
+     |                           ^^^^^^^^^^^^ Passing a ref to a function may read its value during render
+  58 |         inputRange: [0, 1],
+  59 |         outputRange: ["10%", "96%"],
+  60 |     });                                                                             react-hooks/refs
+  57:27  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+F:\projects\expo-app\ITSOFTLAB360\components\ui\ApiDataLoader.tsx:57:27
+  55 |     }, [pulseAnim, progressAnim]);
+  56 |
+> 57 |     const progressWidth = progressAnim.interpolate({
+     |                           ^^^^^^^^^^^^^^^^^^^^^^^^ Passing a ref to a function may read its value during render
+  58 |         inputRange: [0, 1],
+  59 |         outputRange: ["10%", "96%"],
+  60 |     });                                                                 react-hooks/refs
+
+✖ 29 problems (17 errors, 12 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+

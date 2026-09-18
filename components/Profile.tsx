@@ -1,13 +1,13 @@
 import React from "react";
 import {
-    // Image,
-    // Pressable,
-    SafeAreaView,
+    RefreshControl,
     ScrollView,
     StyleSheet,
     Text,
     View,
 } from "react-native";
+import ApiDataLoader from "@/components/ui/ApiDataLoader";
+import { useApiSimulation } from "@/hooks/useApiSimulation";
 import {
     // ArrowLeft,
     Briefcase,
@@ -23,13 +23,14 @@ import {
 import LogoutButton from "./login/logout";
 
 const USER = {
-    name: "RAHUL AHIRWAL",
+    name: "Rahul Ahirwal",
     firstName: "Rahul",
     lastName: "Ahirwal",
+    username: "rahul.ahirwal",
     designation: "Chief Technology Officer",
-    department: "Technology & Innovation",
+    department: "Technology & Enterprise Architecture",
     employeeId: "ITSL-001",
-    email: "rahul@itsoftlab.com",
+    email: "rahul.ahirwal@itsoftlab.com",
     phone: "+91 98765 43210",
     dob: "15 August 1995",
     gender: "Male",
@@ -39,15 +40,35 @@ const USER = {
     reportingTo: "Managing Director",
     employmentType: "Full Time",
     status: "Active",
-    bio: "Technology leader focused on building scalable products, modern software architecture and innovative digital solutions.",
+    bio: "Chief Technology Officer & Lead Enterprise Architect driving software engineering, cloud infrastructure, and enterprise digital solutions at ITSOFTLAB360.",
 };
 
 export default function ProfileScreen() {
+    const { isLoading, isRefreshing, handleRefresh } = useApiSimulation(2000);
+
+    if (isLoading) {
+        return (
+            <ApiDataLoader
+                title="Loading User Profile..."
+                subtitle="Retrieving enterprise credentials & roles for Rahul Ahirwal..."
+                accentColor="#2563EB"
+            />
+        );
+    }
+
     return (
-        <SafeAreaView style={styles.safeArea}>
+        <View style={styles.safeArea}>
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.container}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={isRefreshing}
+                        onRefresh={handleRefresh}
+                        colors={["#2563EB"]}
+                        tintColor="#2563EB"
+                    />
+                }
             >
                 {/* Header */}
                 {/* <View style={styles.header}>
@@ -126,6 +147,12 @@ export default function ProfileScreen() {
                         icon={<User size={18} color="#64748B" />}
                         label="Full Name"
                         value={USER.name}
+                    />
+
+                    <InfoRow
+                        icon={<ShieldCheck size={18} color="#64748B" />}
+                        label="Username"
+                        value={USER.username}
                     />
 
                     <InfoRow
@@ -271,7 +298,7 @@ export default function ProfileScreen() {
                     ITSOFTLAB360 • Profile
                 </Text>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 }
 

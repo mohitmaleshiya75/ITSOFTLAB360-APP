@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
     ActivityIndicator,
     Image,
@@ -13,6 +13,7 @@ import {
     TextInput,
     View,
 } from "react-native";
+import { User, Lock, Wifi } from "lucide-react-native";
 
 import { useAuth } from "@/components/login/useLogin";
 
@@ -26,40 +27,49 @@ export default function LoginScreen() {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-    // ==========================================================
-    // LOGIN
-    // ==========================================================
+    const passwordInputRef = useRef<TextInput>(null);
 
+    // ==========================================================
+    // DEMO AUTO-FILL
+    // ==========================================================
+    // const handleQuickFill = () => {
+    //     setUsername("rahul.ahirwal");
+    //     setPassword("rahul.ahirwal");
+    //     setErrorMessage("");
+    // };
+
+    // ==========================================================
+    // LOGIN HANDLER
+    // ==========================================================
     const handleLogin = async () => {
         setErrorMessage("");
 
-        if (!username.trim()) {
+        const cleanUser = username.trim();
+        const cleanPass = password.trim();
+
+        if (!cleanUser) {
             setErrorMessage("Please enter your username.");
             return;
         }
 
-        if (!password) {
+        if (!cleanPass) {
             setErrorMessage("Please enter your password.");
             return;
         }
 
         try {
             setLoading(true);
-            if(username!=="rahul.ahirwal"||password!=="rahul.ahirwal"){
-                setErrorMessage("Invalid username or password.");
-            }
+            const res = await login(cleanUser, cleanPass);
 
-            const success = await login(username, password);
-
-            if (!success) {
-                setErrorMessage("Invalid username or password.");
+            if (!res.success) {
+                setErrorMessage(res.message);
                 return;
             }
 
-            // Login successful
+            // Success handled by router in useLogin & Stack.Protected
         } catch (error) {
             console.error(error);
-            setErrorMessage("Unable to login. Please try again.");
+            setErrorMessage("Unable to connect to authentication server. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -72,7 +82,7 @@ export default function LoginScreen() {
         >
             <StatusBar
                 barStyle="dark-content"
-                backgroundColor="#f5f8ff"
+                backgroundColor="#f8faff"
             />
 
             <ScrollView
@@ -81,9 +91,8 @@ export default function LoginScreen() {
                 showsVerticalScrollIndicator={false}
             >
                 {/* ====================================================
-            BRANDING
-        ==================================================== */}
-
+                    BRANDING
+                ==================================================== */}
                 <View style={styles.brandSection}>
                     <View style={styles.logoContainer}>
                         <Image
@@ -93,39 +102,42 @@ export default function LoginScreen() {
                         />
                     </View>
 
-                    <Text style={styles.brandTitle}>
-                        ITSOFTLAB360
-                    </Text>
-
+                    <Text style={styles.brandTitle}>ITSOFTLAB360</Text>
                     <Text style={styles.brandSubtitle}>
-                        Smart Business Management
+                        Unified Enterprise Business Platform
                     </Text>
                 </View>
 
                 {/* ====================================================
-            LOGIN CARD
-        ==================================================== */}
-
+                    LOGIN CARD
+                ==================================================== */}
                 <View style={styles.loginCard}>
-
                     <View style={styles.welcomeSection}>
-                        <Text style={styles.welcomeTitle}>
-                            Welcome Back
-                        </Text>
-
+                        <Text style={styles.welcomeTitle}>Welcome Back</Text>
                         <Text style={styles.welcomeSubtitle}>
-                            Sign in to continue to your ITSOFTLAB360 dashboard
+                            Sign in to access your ITSOFTLAB360 enterprise apps
                         </Text>
                     </View>
 
-                    {/* ==================================================
-              USERNAME
-          ================================================== */}
-
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.inputLabel}>
-                            Username
+                    {/* Quick Fill Demo Helper Chip */}
+                    {/* <Pressable
+                        onPress={handleQuickFill}
+                        style={({ pressed }) => [
+                            styles.demoChip,
+                            pressed && styles.demoChipPressed,
+                        ]}
+                    >
+                        <Sparkles size={14} color="#2563EB" />
+                        <Text style={styles.demoChipText}>
+                            Quick Fill
                         </Text>
+                    </Pressable> */}
+
+                    {/* ==================================================
+                        USERNAME INPUT
+                    ================================================== */}
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.inputLabel}>Username / Email</Text>
 
                         <View
                             style={[
@@ -133,11 +145,7 @@ export default function LoginScreen() {
                                 errorMessage ? styles.inputErrorBorder : null,
                             ]}
                         >
-                            <Ionicons
-                                name="person-outline"
-                                size={20}
-                                color="#64748b"
-                            />
+                            <User size={18} color="#64748B" />
 
                             <TextInput
                                 value={username}
@@ -145,26 +153,24 @@ export default function LoginScreen() {
                                     setUsername(text);
                                     setErrorMessage("");
                                 }}
-                                placeholder="Enter username"
-                                placeholderTextColor="#94a3b8"
+                                placeholder="john.doe"
+                                placeholderTextColor="#94A3B8"
                                 autoCapitalize="none"
                                 autoCorrect={false}
                                 keyboardType="default"
                                 style={styles.input}
                                 editable={!loading}
                                 returnKeyType="next"
+                                onSubmitEditing={() => passwordInputRef.current?.focus()}
                             />
                         </View>
                     </View>
 
                     {/* ==================================================
-              PASSWORD
-          ================================================== */}
-
+                        PASSWORD INPUT
+                    ================================================== */}
                     <View style={styles.inputGroup}>
-                        <Text style={styles.inputLabel}>
-                            Password
-                        </Text>
+                        <Text style={styles.inputLabel}>Password</Text>
 
                         <View
                             style={[
@@ -172,20 +178,17 @@ export default function LoginScreen() {
                                 errorMessage ? styles.inputErrorBorder : null,
                             ]}
                         >
-                            <Ionicons
-                                name="lock-closed-outline"
-                                size={20}
-                                color="#64748b"
-                            />
+                            <Lock size={18} color="#64748B" />
 
                             <TextInput
+                                ref={passwordInputRef}
                                 value={password}
                                 onChangeText={(text) => {
                                     setPassword(text);
                                     setErrorMessage("");
                                 }}
-                                placeholder="Enter password"
-                                placeholderTextColor="#94a3b8"
+                                placeholder="••••••••••••"
+                                placeholderTextColor="#94A3B8"
                                 secureTextEntry={!showPassword}
                                 autoCapitalize="none"
                                 autoCorrect={false}
@@ -196,107 +199,89 @@ export default function LoginScreen() {
                             />
 
                             <Pressable
-                                onPress={() =>
-                                    setShowPassword((previous) => !previous)
-                                }
+                                onPress={() => setShowPassword((prev) => !prev)}
                                 hitSlop={10}
                             >
                                 <Ionicons
-                                    name={
-                                        showPassword
-                                            ? "eye-outline"
-                                            : "eye-off-outline"
-                                    }
-                                    size={21}
-                                    color="#64748b"
+                                    name={showPassword ? "eye-outline" : "eye-off-outline"}
+                                    size={20}
+                                    color="#64748B"
                                 />
                             </Pressable>
                         </View>
                     </View>
 
                     {/* ==================================================
-              ERROR
-          ================================================== */}
-
+                        ERROR MESSAGE
+                    ================================================== */}
                     {errorMessage ? (
                         <View style={styles.errorContainer}>
                             <Ionicons
                                 name="alert-circle-outline"
                                 size={18}
-                                color="#dc2626"
+                                color="#DC2626"
                             />
-
-                            <Text style={styles.errorText}>
-                                {errorMessage}
-                            </Text>
+                            <Text style={styles.errorText}>{errorMessage}</Text>
                         </View>
                     ) : null}
 
                     {/* ==================================================
-              LOGIN BUTTON
-          ================================================== */}
-
+                        LOGIN BUTTON
+                    ================================================== */}
                     <Pressable
                         onPress={handleLogin}
                         disabled={loading}
                         style={({ pressed }) => [
                             styles.loginButton,
-                            pressed && !loading
-                                ? styles.loginButtonPressed
-                                : null,
+                            pressed && !loading ? styles.loginButtonPressed : null,
                             loading ? styles.loginButtonDisabled : null,
                         ]}
                     >
                         {loading ? (
-                            <ActivityIndicator
-                                size="small"
-                                color="#ffffff"
-                            />
+                            <View style={styles.loadingRow}>
+                                <ActivityIndicator size="small" color="#FFFFFF" />
+                                <Text style={styles.loginButtonText}>
+                                    Authenticating ...
+                                </Text>
+                            </View>
                         ) : (
                             <>
-                                <Text style={styles.loginButtonText}>
-                                    Sign In
-                                </Text>
-
+                                <Text style={styles.loginButtonText}>Sign In</Text>
                                 <Ionicons
                                     name="arrow-forward"
-                                    size={20}
-                                    color="#ffffff"
+                                    size={19}
+                                    color="#FFFFFF"
                                 />
                             </>
                         )}
                     </Pressable>
 
+                    {/* Live Server Telemetry Feedback during Loading */}
+                    {loading && (
+                        <View style={styles.liveFeedback}>
+                            <Wifi size={13} color="#2563EB" />
+                            <Text style={styles.liveFeedbackText}>
+                                Connecting to ITSOFTLAB Authentication Gateway...
+                            </Text>
+                        </View>
+                    )}
+
                     {/* ==================================================
-              SECURITY MESSAGE
-          ================================================== */}
-
-                    <View style={styles.securityInfo}>
-                        <Ionicons
-                            name="shield-checkmark-outline"
-                            size={18}
-                            color="#2563eb"
-                        />
-
+                        SECURITY INFO
+                    ================================================== */}
+                    {/* <View style={styles.securityInfo}>
+                        <ShieldCheck size={16} color="#2563EB" />
                         <Text style={styles.securityText}>
-                            Authorized access only
+                            Encrypted with TLS 1.3 • Authorized access only
                         </Text>
-                    </View>
-
+                    </View> */}
                 </View>
 
                 {/* ====================================================
-            FOOTER
-        ==================================================== */}
-
+                    FOOTER
+                ==================================================== */}
                 <View style={styles.footer}>
-                    <Text style={styles.footerText}>
-                        ITSOFTLAB360
-                    </Text>
-
-                    <Text style={styles.footerVersion}>
-                        Secure Business Management Platform
-                    </Text>
+                    <Text style={styles.footerText}>ITSOFTLAB CONSULTANCY SERVICES PVT. LTD.</Text>
                 </View>
             </ScrollView>
         </KeyboardAvoidingView>
@@ -310,7 +295,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f5f8ff",
+        backgroundColor: "#F8FAFC",
     },
 
     scrollContent: {
@@ -320,237 +305,238 @@ const styles = StyleSheet.create({
         paddingBottom: 30,
     },
 
-    // ----------------------------------------------------------
-    // BRAND
-    // ----------------------------------------------------------
-
     brandSection: {
         alignItems: "center",
-        marginBottom: 28,
+        marginBottom: 24,
     },
 
     logoContainer: {
-        width: 86,
-        height: 86,
+        width: 82,
+        height: 82,
         borderRadius: 22,
-        backgroundColor: "#ffffff",
+        backgroundColor: "#FFFFFF",
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: 14,
-
-        shadowColor: "#0f172a",
-        shadowOffset: {
-            width: 0,
-            height: 5,
-        },
+        marginBottom: 12,
+        shadowColor: "#0F172A",
+        shadowOffset: { width: 0, height: 6 },
         shadowOpacity: 0.08,
         shadowRadius: 12,
-
         elevation: 4,
     },
 
     logo: {
-        width: 68,
-        height: 68,
+        width: 62,
+        height: 62,
     },
 
     brandTitle: {
         fontSize: 24,
         fontWeight: "900",
-        color: "#0f2a70",
+        color: "#0F172A",
         letterSpacing: 0.5,
     },
 
     brandSubtitle: {
-        marginTop: 5,
+        marginTop: 4,
         fontSize: 13,
-        color: "#64748b",
+        color: "#64748B",
         fontWeight: "500",
     },
 
-    // ----------------------------------------------------------
-    // CARD
-    // ----------------------------------------------------------
-
     loginCard: {
-        backgroundColor: "#ffffff",
+        backgroundColor: "#FFFFFF",
         borderRadius: 24,
         padding: 22,
-
-        shadowColor: "#0f172a",
-        shadowOffset: {
-            width: 0,
-            height: 8,
-        },
-        shadowOpacity: 0.08,
+        shadowColor: "#0F172A",
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.07,
         shadowRadius: 20,
-
         elevation: 5,
+        borderWidth: 1,
+        borderColor: "#EDF2F7",
     },
 
     welcomeSection: {
-        marginBottom: 26,
+        marginBottom: 16,
     },
 
     welcomeTitle: {
-        fontSize: 27,
+        fontSize: 24,
         fontWeight: "800",
-        color: "#0f172a",
+        color: "#0F172A",
     },
 
     welcomeSubtitle: {
         fontSize: 13,
-        lineHeight: 20,
-        color: "#64748b",
-        marginTop: 7,
+        color: "#64748B",
+        marginTop: 4,
+        lineHeight: 18,
     },
 
-    // ----------------------------------------------------------
-    // INPUT
-    // ----------------------------------------------------------
+    demoChip: {
+        flexDirection: "row",
+        alignItems: "center",
+        alignSelf: "flex-start",
+        backgroundColor: "#EFF6FF",
+        borderWidth: 1,
+        borderColor: "#BFDBFE",
+        borderRadius: 20,
+        paddingHorizontal: 12,
+        paddingVertical: 7,
+        gap: 6,
+        marginBottom: 20,
+    },
+
+    demoChipPressed: {
+        backgroundColor: "#DBEAFE",
+    },
+
+    demoChipText: {
+        fontSize: 12,
+        color: "#1D4ED8",
+        fontWeight: "700",
+    },
 
     inputGroup: {
-        marginBottom: 18,
+        marginBottom: 16,
     },
 
     inputLabel: {
         fontSize: 13,
         fontWeight: "700",
         color: "#334155",
-        marginBottom: 8,
+        marginBottom: 7,
     },
 
     inputContainer: {
-        height: 54,
-        borderWidth: 1,
-        borderColor: "#dbe3ef",
-        backgroundColor: "#f8fafc",
-        borderRadius: 13,
-
         flexDirection: "row",
         alignItems: "center",
-
-        paddingHorizontal: 15,
-        gap: 11,
+        backgroundColor: "#F8FAFC",
+        borderWidth: 1.5,
+        borderColor: "#E2E8F0",
+        borderRadius: 14,
+        paddingHorizontal: 14,
+        height: 52,
+        gap: 10,
     },
 
     inputErrorBorder: {
-        borderColor: "#ef4444",
+        borderColor: "#EF4444",
+        backgroundColor: "#FEF2F2",
     },
 
     input: {
         flex: 1,
-        height: "100%",
-        color: "#0f172a",
-        fontSize: 14,
+        fontSize: 15,
+        color: "#0F172A",
         fontWeight: "500",
     },
-
-    // ----------------------------------------------------------
-    // ERROR
-    // ----------------------------------------------------------
 
     errorContainer: {
         flexDirection: "row",
         alignItems: "center",
-        gap: 7,
-
-        backgroundColor: "#fef2f2",
-        borderRadius: 10,
-
+        backgroundColor: "#FEF2F2",
+        borderWidth: 1,
+        borderColor: "#FECACA",
+        borderRadius: 12,
         paddingHorizontal: 12,
         paddingVertical: 10,
-
+        gap: 8,
         marginBottom: 16,
     },
 
     errorText: {
-        flex: 1,
-        color: "#dc2626",
-        fontSize: 12,
+        fontSize: 13,
+        color: "#DC2626",
         fontWeight: "600",
+        flex: 1,
     },
 
-    // ----------------------------------------------------------
-    // BUTTON
-    // ----------------------------------------------------------
-
     loginButton: {
-        height: 55,
-        borderRadius: 13,
-
-        backgroundColor: "#155eef",
-
+        backgroundColor: "#2563EB",
+        borderRadius: 14,
+        height: 52,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-
-        gap: 10,
-
-        shadowColor: "#155eef",
-        shadowOffset: {
-            width: 0,
-            height: 5,
-        },
-        shadowOpacity: 0.2,
-        shadowRadius: 10,
-
-        elevation: 4,
+        gap: 8,
+        marginTop: 6,
+        shadowColor: "#2563EB",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+        elevation: 3,
     },
 
     loginButtonPressed: {
-        opacity: 0.85,
+        backgroundColor: "#1D4ED8",
         transform: [{ scale: 0.99 }],
     },
 
     loginButtonDisabled: {
-        opacity: 0.7,
+        backgroundColor: "#93C5FD",
+        shadowOpacity: 0.1,
     },
 
     loginButtonText: {
-        color: "#ffffff",
+        color: "#FFFFFF",
         fontSize: 15,
-        fontWeight: "800",
+        fontWeight: "700",
+        letterSpacing: 0.3,
     },
 
-    // ----------------------------------------------------------
-    // SECURITY
-    // ----------------------------------------------------------
+    loadingRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
+    },
+
+    liveFeedback: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 6,
+        marginTop: 12,
+    },
+
+    liveFeedbackText: {
+        fontSize: 11,
+        color: "#2563EB",
+        fontWeight: "600",
+    },
 
     securityInfo: {
         flexDirection: "row",
-        justifyContent: "center",
         alignItems: "center",
-
-        gap: 7,
-
-        marginTop: 20,
+        justifyContent: "center",
+        gap: 6,
+        marginTop: 18,
+        paddingTop: 14,
+        borderTopWidth: 1,
+        borderTopColor: "#F1F5F9",
     },
 
     securityText: {
         fontSize: 11,
-        color: "#64748b",
-        fontWeight: "600",
+        color: "#64748B",
+        fontWeight: "500",
     },
-
-    // ----------------------------------------------------------
-    // FOOTER
-    // ----------------------------------------------------------
 
     footer: {
         alignItems: "center",
-        marginTop: 30,
+        marginTop: 28,
     },
 
     footerText: {
-        fontSize: 12,
-        fontWeight: "800",
-        color: "#64748b",
+        fontSize: 13,
+        fontWeight: "700",
+        color: "#475569",
     },
 
     footerVersion: {
-        marginTop: 4,
-        fontSize: 10,
-        color: "#94a3b8",
+        fontSize: 11,
+        color: "#94A3B8",
+        marginTop: 3,
     },
 });

@@ -2,12 +2,15 @@ import React, { useMemo, useState } from "react";
 import {
     Modal,
     Pressable,
-    SafeAreaView,
+    RefreshControl,
+    View,
     ScrollView,
     StyleSheet,
     Text,
-    View,
 } from "react-native";
+import { useRouter } from "expo-router";
+import ApiDataLoader from "@/components/ui/ApiDataLoader";
+import { useApiSimulation } from "@/hooks/useApiSimulation";
 
 import {
     Users,
@@ -272,6 +275,9 @@ const APPLICATION_DATA: Record<string, ApplicationStats> = {
 ============================================================ */
 
 export default function CommonDashboard() {
+    const router = useRouter();
+    const { isLoading, isRefreshing, handleRefresh } = useApiSimulation(2000);
+
     const [showApplications, setShowApplications] =
         useState(false);
 
@@ -313,14 +319,10 @@ export default function CommonDashboard() {
     ) => {
         setSelectedApplication(application);
         setShowApplications(false);
-
-        /*
-         * Later you can navigate here:
-         *
-         * router.push(application.route);
-         *
-         * For now we only select the application.
-         */
+        router.push({
+            pathname: "/application/[id]",
+            params: { id: application.id },
+        });
     };
 
     /* ---------------------------------------------------------
@@ -343,11 +345,29 @@ export default function CommonDashboard() {
         return `₹${value.toLocaleString("en-IN")}`;
     };
 
+    if (isLoading) {
+        return (
+            <ApiDataLoader
+                title="Fetching Live Enterprise Telemetry..."
+                subtitle="Synchronizing KPIs, active sessions & application revenue..."
+                accentColor="#2563EB"
+            />
+        );
+    }
+
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.scrollContent}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={isRefreshing}
+                        onRefresh={handleRefresh}
+                        colors={["#2563EB"]}
+                        tintColor="#2563EB"
+                    />
+                }
             >
                 {/* =================================================
                     HEADER
@@ -398,7 +418,7 @@ export default function CommonDashboard() {
 
                 <View style={styles.welcomeSection}>
                     <Text style={styles.welcomeTitle}>
-                        Good Morning, Admin 👋
+                        Good Morning, Rahul Ahirwal 👋
                     </Text>
 
                     <Text style={styles.welcomeSubtitle}>
@@ -834,7 +854,7 @@ export default function CommonDashboard() {
                     </View>
                 </View>
             </Modal>
-        </SafeAreaView>
+        </View>
     );
 }
 

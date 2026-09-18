@@ -2138,7 +2138,7 @@
 //     },
 // });
 
-import React, { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
     ActivityIndicator,
     Animated,
@@ -2347,10 +2347,10 @@ const dummyUser = {
     territoryId: null,
     managerId: null,
 
-    email: "devendradangi9174@gmail.com",
+    email: "rahul.ahirwal@itsoftlab360.com",
 
-    firstName: "Devendra",
-    lastName: "Dangi",
+    firstName: "Rahul",
+    lastName: "Ahirwal",
 
     phoneNumber: "9876543210",
     avatarUrl: null,
@@ -3522,13 +3522,13 @@ export default function SuperAdminDashboard() {
        ANIMATION
     ======================================================== */
 
-    const fadeAnim = useRef(
-        new Animated.Value(0)
-    ).current;
+    const [fadeAnim] = useState(
+        () => new Animated.Value(0)
+    );
 
-    const translateY = useRef(
-        new Animated.Value(10)
-    ).current;
+    const [translateY] = useState(
+        () => new Animated.Value(10)
+    );
 
     useEffect(() => {
         Animated.parallel([
@@ -3841,8 +3841,8 @@ export default function SuperAdminDashboard() {
 
             return {
                 text: `${difference >= 0
-                        ? "+"
-                        : ""
+                    ? "+"
+                    : ""
                     }${difference.toFixed(
                         1
                     )}% MoM Growth`,

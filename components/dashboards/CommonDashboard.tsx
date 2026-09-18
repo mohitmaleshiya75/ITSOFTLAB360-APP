@@ -2,12 +2,15 @@ import React, { useMemo } from "react";
 import {
     Dimensions,
     Pressable,
+    RefreshControl,
     ScrollView,
     StyleSheet,
     Text,
     View,
     TouchableOpacity
 } from "react-native";
+import ApiDataLoader from "@/components/ui/ApiDataLoader";
+import { useApiSimulation } from "@/hooks/useApiSimulation";
 
 import {
     Activity,
@@ -834,6 +837,8 @@ export default function CommonApplicationDashboard({
     application,
 }: ApplicationDashboardProps) {
     const router = useRouter();
+    const { isLoading, isRefreshing, handleRefresh } = useApiSimulation(2000);
+
     const data = useMemo(() => {
         return (
             APPLICATION_DATA[application.id] ||
@@ -841,11 +846,29 @@ export default function CommonApplicationDashboard({
         );
     }, [application.id]);
 
+    if (isLoading) {
+        return (
+            <ApiDataLoader
+                title={`Loading ${application.name}...`}
+                subtitle={`Connecting to ${application.name} microservices and streaming live data...`}
+                accentColor={application.color}
+            />
+        );
+    }
+
     return (
         <ScrollView
             style={styles.container}
             contentContainerStyle={styles.content}
             showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl
+                    refreshing={isRefreshing}
+                    onRefresh={handleRefresh}
+                    colors={[application.color]}
+                    tintColor={application.color}
+                />
+            }
         >
             {/* ====================================================
                 HEADER

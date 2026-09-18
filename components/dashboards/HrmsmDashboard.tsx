@@ -6,16 +6,15 @@
 // import useGetPerformanceAnalytics from "@/features/dashboard/hooks/performace";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React, { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
     Image,
     RefreshControl,
     ScrollView,
     StyleSheet,
     Text,
-    TouchableOpacity,
     useColorScheme,
-    View,
+    View
 } from "react-native";
 // import DashboardSkeleton from "../skelaton/DashboardSkelaton";
 
@@ -41,7 +40,7 @@ const FAKE_USER = {
     first_name: "Rahul",
     last_name: "Ahirwal",
     username: "rahul.ahirwal",
-    email: "rahul@itsoftlab.com",
+    email: "rahul.ahirwal@itsoftlab.com",
     profile_image_url:
         "https://ui-avatars.com/api/?name=Rahul+Ahirwal&background=10b981&color=fff&size=200",
 };
@@ -93,7 +92,7 @@ const FAKE_ANNOUNCEMENTS = [
         title: "New Attendance Policy",
         message:
             "Please make sure to mark your attendance from the HRMS mobile application.",
-        created_by_name: "Admin",
+        created_by_name: "Rahul Ahirwal",
     },
     {
         id: 3,

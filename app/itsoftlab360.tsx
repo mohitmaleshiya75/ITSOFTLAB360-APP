@@ -414,7 +414,7 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
+  // SafeAreaView,
   StatusBar,
   TouchableOpacity,
   Modal,
@@ -674,7 +674,7 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   return (
-    <SafeAreaView style={styles.safe}>
+    <View>
       <Stack.Screen
         options={{
           title: "ITSOFTLAB360",
@@ -952,7 +952,7 @@ export default function Home() {
           </View>
         </View>
       </Modal>
-    </SafeAreaView>
+      </View>
   );
 }
 
@@ -1177,7 +1177,11 @@ const styles = StyleSheet.create({
   },
 
   modalBackground: {
-    ...StyleSheet.absoluteFillObject,
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
     backgroundColor: "rgba(15, 23, 42, 0.65)",
   },
 
@@ -1275,5 +1279,3 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
 });
-
-//test

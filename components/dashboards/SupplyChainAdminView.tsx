@@ -122,7 +122,7 @@ const dummyData = {
         {
             id: "1",
             title: "Purchase order PO-1048 was approved",
-            user: "Rahul",
+            user: "Rahul Ahirwal",
             createdAt: "Today, 10:42 AM",
         },
         {
