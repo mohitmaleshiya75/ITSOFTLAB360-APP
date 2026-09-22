@@ -122,6 +122,20 @@ export default function TabLayout() {
                         ),
                     }}
                 />
+                <Tabs.Screen
+                    name="sfa"
+                    options={{
+                        title: "sfa",
+
+                        tabBarIcon: ({ color, size }) => (
+                            <User
+                                size={size}
+                                color={color}
+                                strokeWidth={2.2}
+                            />
+                        ),
+                    }}
+                />
             </Tabs>
         </SafeAreaProvider>
     );

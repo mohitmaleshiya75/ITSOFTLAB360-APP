@@ -1,3 +1,5 @@
+import ApiDataLoader from "@/components/ui/ApiDataLoader";
+import { useApiSimulation } from "@/hooks/useApiSimulation";
 import React, { useMemo } from "react";
 import {
     Dimensions,
@@ -6,12 +8,12 @@ import {
     ScrollView,
     StyleSheet,
     Text,
-    View,
-    TouchableOpacity
+    TouchableOpacity,
+    View
 } from "react-native";
-import ApiDataLoader from "@/components/ui/ApiDataLoader";
-import { useApiSimulation } from "@/hooks/useApiSimulation";
 
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import {
     Activity,
     AlertCircle,
@@ -33,8 +35,6 @@ import {
     UserCheck,
     Users,
 } from "lucide-react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 // import { TouchableOpacity } from "react-native";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
