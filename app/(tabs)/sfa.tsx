@@ -1,5 +1,5 @@
 import React from 'react'
-import Dashboard from '@/components/sfa/dashboard/Dashboard'
+import Dashboard from '@/components/Supply_Chain/Dashboard/Dashboard'
 
 const SFA = () => {
     return (
