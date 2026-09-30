@@ -418,7 +418,7 @@ export default function CommonDashboard() {
 
                 <View style={styles.welcomeSection}>
                     <Text style={styles.welcomeTitle}>
-                        Good Morning, Rahul Ahirwal 👋
+                        Welcome back, Rahul Ahirwal 👋
                     </Text>
 
                     <Text style={styles.welcomeSubtitle}>
